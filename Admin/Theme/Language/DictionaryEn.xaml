@@ -1,0 +1,18 @@
+﻿<ResourceDictionary
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:System="clr-namespace:System;assembly=mscorlib">
+	<!-- 应该在此定义资源字典条目。-->
+
+    <System:String x:Key="messageBoxTipTitle">Tip</System:String>
+    <System:String x:Key="messageBoxWarnTitle">Warming</System:String>
+    <System:String x:Key="messageBoxErrorTitle">Error</System:String>
+
+    <System:String x:Key="loginWindowHeading">Login Window</System:String>
+    <System:String x:Key="loginWindowHeadingHelp">单灯用户分为管理员(Administrator)与访客模式(Guest)，管理员一般用于实际项目，具有所有权限，包括配置，控制，采集，查询等等，访客模式仅在需要模拟演示中使用，具有所有权限，数据与管理员完全分开。</System:String>
+    <System:String x:Key="loginWindowlabName">UserName :</System:String>
+    <System:String x:Key="loginWindowlabPassword">Password :</System:String>
+    <System:String x:Key="loginWindowcbRememberPwd">Remember Password</System:String>
+    <System:String x:Key="loginWindowbtnLogin">Login</System:String>
+    <System:String x:Key="loginWindowbtnExit">Exit</System:String>
+
+</ResourceDictionary>

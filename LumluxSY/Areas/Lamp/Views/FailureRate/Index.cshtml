@@ -1,0 +1,127 @@
+﻿@{
+    ViewBag.Title = "统计查询";
+    Layout = "~/Areas/Lamp/Views/Shared/_LayoutPageMain.cshtml";
+}
+
+@{var alarmDemo = (List<LumluxSY.Areas.Lamp.Models.PrjectSetInfoVM>)ViewBag.AlarmDemos;}
+@{var allHost = (List<LumluxSSYDB.Model.tHostInfo>)ViewBag.vHost;}
+<!-- END HEAD -->
+<input id="hostGUID" name="hostGUID" type="hidden" value="@ViewBag.sHostGUID" />
+
+<!-- BEGIN CHART PORTLET-->
+<div class="col-md-12">
+    <!-- BEGIN EXAMPLE TABLE PORTLET-->
+    <div class="portlet light bordered" style="margin:10px">
+        <div class="portlet-title">
+            <div class="caption font-dark">
+                <i class="fa fa-pie-chart"></i>
+                <span class="caption-subject bold uppercase">@ViewBag.HostNames </span>
+                <span id="sConputerName" style="font-size:12px;color:gray;">&nbsp;-&nbsp;统计查询</span>
+            </div>
+
+        </div>
+        <div class="portlet-body">
+
+            <div id="sample_1_wrapper" class="dataTables_wrapper no-footer">
+                <div class="row">
+                    <div class="col-md-4 col-sm-4">
+                        <input id="LightName" type="text" class="form-control" placeholder="请数入单灯名称(模糊查询)">
+                    </div>
+
+                    <div id="divAlarm" class="col-md-4 col-sm-4">
+
+                        @*<div class="input-group select2-bootstrap-prepend"></div>*@
+                        @*<span class="input-group-btn">
+                                <button class="btn btn-default" type="button" data-select2-open="yy"> 报警信息 </button>
+                            </span>*@
+                        <select id="selectedAlarm" class="form-control select2-multiple" multiple>
+
+
+                            @for (int i = 0; i < alarmDemo.Count; i++)
+                            {
+                                if (i == 1)
+                                {
+                                    <option value="@alarmDemo[i].sKey" selected="selected">@alarmDemo[i].sDesc</option>
+                                }
+                                else
+                                {
+                                    <option value="@alarmDemo[i].sKey">@alarmDemo[i].sDesc</option>
+                                }
+                            }
+
+                        </select>
+                    </div>
+                </div>
+                <div class="row" style="margin-top:10px;">
+                    <div id="divHost" class="col-md-4 col-sm-4">
+
+
+                        <div class="input-group  select2-bootstrap-prepend">
+                            <select id="selectedHost" class="form-control select2-multiple" multiple>
+                                @for (int i = 0; i < allHost.Count; i++)
+                                {
+                                    if (i < 1)
+                                    {
+                                        <option value="@allHost[i].sGUID" selected="selected">@allHost[i].sName</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@allHost[i].sGUID">@allHost[i].sName</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4">
+                        <div id="divPickDate" class="actions">
+                            <div id="sreportrange" class="btn default" data-original-title="选择有效日期" title="选择有效日期">
+                                <i class="fa fa-calendar"></i> &nbsp;
+                                <span></span>
+                                <b class="fa fa-angle-down"></b>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="divAlarm" class="col-md-2 col-sm-2">
+                        <div class="btn-group pull-right">
+                            <button id="btnSeach" style="" class="btn green  btn-outline dropdown-toggle">统计</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-7 col-sm-12" style="margin-left:20px">
+                        <div id="chart_7" class="chart" style="height: 410px;">
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-12" style=" width:410px; margin-top:80px; margin-left:-20px">
+                        <div class="note note-info scroller bg-grey-cararra font-blue-dark" style="height:280px;border-color:#c2d0e1">
+                            <h4>详细信息</h4>
+                            <table id="tDESC" class="font-blue-dark" style="font-size:13px"></table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END EXAMPLE TABLE PORTLET-->
+    </div>
+</div>
+
+@section MainCSS
+{
+    <link src="/UILib/Metronic/assets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+        input::-ms-clear {
+            display: none;
+        }
+        input {
+            outline: none;
+        }
+    </style>
+}
+
+@section MainJS{
+    <script src="/UILib/Metronic/assets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.js" type="text/javascript"></script>
+    <script src="/UILib/Metronic/assets/global/plugins/amcharts/amcharts/amcharts.js" type="text/javascript"></script>
+    <script src="/UILib/Metronic/assets/global/plugins/amcharts/amcharts/pie.js" type="text/javascript"></script>
+    <script src="/UILib/Metronic/assets/global/plugins/amcharts/amcharts/themes/light.js" type="text/javascript"></script>
+    <script src="~/Scripts/Lamp/FailureCharts.js" type="text/javascript"></script>
+}

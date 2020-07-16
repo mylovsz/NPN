@@ -1,0 +1,47 @@
+﻿@model LumluxSY.Areas.Lamp.Models.DeviceViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Lamp/Views/Shared/_LayoutPageMain.cshtml";
+}
+
+@Html.HiddenFor(m => m.MapCenterLat)
+@Html.HiddenFor(m => m.MapCenterLng)
+<div class="row widget-row margin-top-20">
+    <div class="col-md-12">
+        <div class="portlet light tasks-widget widget-comments">
+            <div class="portlet light tasks-widget widget-comments">
+                <div class="portlet-title">
+                    <div class="col-md-6 caption caption-md font-red-sunglo">
+                        <span class="caption-subject theme-font bold uppercase">编辑设备基本信息</span>
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <div class="row">
+                        <div class="col-md-2 col-sm-2">
+                            <div class="scroller" style="height: 450px;" data-handle-color="#637283">
+                                <div id="tree_3" class="tree-demo">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-10 col-sm-10">
+                            <div style="min-height:450px;" id="gmap_marker"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section MainCSS{
+<link href="/UILib/Metronic/assets/global/plugins/jstree/dist/themes/default/style.min.css" rel="stylesheet" type="text/css" />
+}
+@section MainJS{
+<script src="http://ditu.google.cn/maps/api/js?key=AIzaSyAc1YixAJuZBs7nnzCfBAxbwMKYexIU7sw&sensor=true" type="text/javascript"></script>
+<script src="/UILib/Metronic/assets/global/plugins/gmaps/gmaps.min.js" type="text/javascript"></script>
+<script src="/Scripts/Lamp/markerclusterer.js"></script>
+<script src="/UILib/Metronic/assets/global/plugins/jstree/dist/jstree.min.js" type="text/javascript"></script>
+<script src="/UILib/Metronic/assets/global/scripts/datatable.js" type="text/javascript"></script>
+<script src="/UILib/Metronic/assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
+<script src="/UILib/Metronic/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
+<script src="/Scripts/Lamp/Device/DeviceTree.js" type="text/javascript"></script>
+}

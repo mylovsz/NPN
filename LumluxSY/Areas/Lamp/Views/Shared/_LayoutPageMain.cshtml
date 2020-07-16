@@ -1,0 +1,724 @@
+﻿@using Models = LumluxSY.Areas.Lamp.Models
+<!DOCTYPE html>
+<!--
+Template Name: Metronic - Responsive Admin Dashboard Template build with Twitter Bootstrap 3.3.5
+Version: 4.5.2
+Author: KeenThemes
+Website: http://www.keenthemes.com/
+Contact: support@keenthemes.com
+Follow: www.twitter.com/keenthemes
+Like: www.facebook.com/keenthemes
+Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes
+License: You must have a valid license purchased only from themeforest(the above link) in order to legally use the theme for your project.
+-->
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<!-- BEGIN HEAD -->
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    @*<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />*@
+    <link href="/UILib/Metronic/assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="/UILib/Metronic/assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="/UILib/Metronic/assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+
+    <link href="/UILib/Metronic/assets/global/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css" />
+    <!-- END GLOBAL MANDATORY STYLES -->
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+    <link href="/UILib/Metronic/assets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.css" rel="stylesheet" type="text/css" />
+    <link href="/UILib/Metronic/assets/global/plugins/morris/morris.css" rel="stylesheet" type="text/css" />
+    <link href="/UILib/Metronic/assets/global/plugins/mapplic/mapplic/mapplic.css" rel="stylesheet" type="text/css" />
+    <!-- END PAGE LEVEL PLUGINS -->
+    @* select 2 *@
+    <link href="/UILib/Metronic/assets/global/plugins/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
+    <link href="/UILib/Metronic/assets/global/plugins/select2/css/select2-bootstrap.min.css" rel="stylesheet" type="text/css" />
+    @* slider *@
+    <link href="/UILib/Metronic/assets/global/plugins/ion.rangeslider/css/ion.rangeSlider.css" rel="stylesheet" type="text/css" />
+    <link href="/UILib/Metronic/assets/global/plugins/ion.rangeslider/css/ion.rangeSlider.skinFlat.css" rel="stylesheet" type="text/css" />
+    @* switch *@
+    <link href="/UILib/Metronic/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
+    <!-- BEGIN THEME GLOBAL STYLES -->
+    <link href="/UILib/Metronic/assets/global/css/components.min.css" rel="stylesheet" id="style_components" type="text/css" />
+    <link href="/UILib/Metronic/assets/global/css/plugins.min.css" rel="stylesheet" type="text/css" />
+    <!-- END THEME GLOBAL STYLES -->
+    <!-- BEGIN THEME LAYOUT STYLES -->
+    <link href="/UILib/Metronic/theme/layout7/layout.css" rel="stylesheet" type="text/css" />
+    <link href="/UILib/Metronic/theme/layout7/custom.css" rel="stylesheet" type="text/css" />
+    <!-- BEGIN THEME GLOBAL STYLES -->
+    <link href="~/UILib/Metronic/assets/pages/css/profile.min.css" rel="stylesheet" id="style_components" type="text/css" />
+    <link href="/UILib/Metronic/assets/apps/css/inbox.min.css" rel="stylesheet" type="text/css" />
+    <link href="/UILib/Metronic/assets/apps/css/todo-2.min.css" rel="stylesheet" type="text/css" />
+
+    <link href="/UILib/Metronic/assets/global/plugins/cubeportfolio/css/cubeportfolio.min.css" rel="stylesheet" type="text/css" />
+
+
+    @*<link href="/UILib/Metronic/assets/global/plugins/clockface/css/clockface.css" rel="stylesheet" type="text/css" />
+        <link href="/UILib/Metronic/assets/global/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css" rel="stylesheet" type="text/css" />*@
+
+
+    <!-- END THEME LAYOUT STYLES -->
+    <link rel="shortcut icon" href="favicon.ico" />
+    <style type="text/css">
+        /*
+        html, body {
+             height: 100%;
+            overflow: hidden;
+        }
+
+            html > body {
+                width: auto;
+                height: auto;
+                position: absolute;
+                top: 0px;
+                left: 0px;
+                right: 0px;
+                bottom: 0px;
+            }
+
+        #gmap_marker {
+            width: 100%;
+
+            margin-top:0px;
+            background-color: #6633FF;
+            position: absolute;
+            bottom: 0px;
+            bottom: -1px;
+        }*/
+    </style>
+
+    @RenderSection("MainCSS", false)
+</head>
+<!-- END HEAD -->
+<body class="page-container-bg-solid">
+
+    <!-- BEGIN HEADER -->
+    <div class="page-header navbar-fixed-top" style="height:70px;">
+        <!-- BEGIN HEADER INNER -->
+        <div class="clearfix">
+            <!-- BEGIN BURGER TRIGGER -->
+            <div class="burger-trigger">
+                <button class="menu-trigger">
+                    <img src="/UILib/Metronic/assets/layouts/layout7/img/m_toggler.png" alt="">
+                </button>
+                <div class="menu-overlay menu-overlay-bg-transparent">
+                    <div class="menu-overlay-content">
+                        <div class="menu-overlay menu-overlay-bg-transparent">
+                            <div class="menu-overlay-content">
+                                <script>
+                                    function ToGoogle() {
+                                        $.ajax({
+                                            type: "GET",
+                                            timeout: 10000,
+                                            cache: false,//拒绝缓存
+                                            async: false,//异步提交
+                                            url: 'https://ditu.google.cn/maps/api/js?key=AIzaSyAc1YixAJuZBs7nnzCfBAxbwMKYexIU7sw&sensor=true',
+                                            dataType: 'Json',
+                                            success: function (data2) {
+                                                $.ajax({
+                                                    type: "POST",
+                                                    cache: false,//拒绝缓存
+                                                    async: false,//异步提交
+                                                    url: '/Lamp/Main/ConfigMap?map=GoogleMap',
+                                                    data: { map: "GoogleMap" },
+                                                    dataType: 'Json',
+                                                    success: function (data2) {
+                                                        location.reload(true);
+                                                    },
+                                                    error: function (error) {
+                                                        location.href = '/Lamp/User/Login';
+                                                    }
+                                                })
+                                            },
+                                            error: function (error) {
+                                                if (error.status == 200 || error.status == 503) {
+                                                    $.ajax({
+                                                        type: "POST",
+                                                        cache: false,//拒绝缓存
+                                                        async: false,//异步提交
+                                                        url: '/Lamp/Main/ConfigMap?map=GoogleMap',
+                                                        data: { map: "GoogleMap" },
+                                                        dataType: 'Json',
+                                                        success: function (data2) {
+                                                            location.reload(true);
+                                                        },
+                                                        error: function (error) {
+                                                            location.href = '/Lamp/User/Login';
+                                                        }
+                                                    })
+                                                }
+                                                else {
+                                                    alert("无法访问GooGle地图，停止切换");
+                                                }
+                                            }
+                                        })
+                                    }
+                                    function ToAMap() {
+                                        $.ajax({
+                                            type: "GET",
+                                            timeout: 10000,
+                                            cache: false,//拒绝缓存
+                                            async: false,//异步提交
+                                            url: 'https://webapi.amap.com/maps?v=1.4.15&key=2e6742d09c3d5f25d6cdb66f01a51f1c',
+                                            dataType: 'Json',
+                                            success: function (data2) {
+                                                $.ajax({
+                                                    type: "POST",
+                                                    cache: false,//拒绝缓存
+                                                    async: false,//异步提交
+                                                    url: '/Lamp/Main/ConfigMap?map=AMap',
+                                                    data: { map: "AMap" },
+                                                    dataType: 'Json',
+                                                    success: function (data2) {
+                                                        location.reload(true);
+                                                    },
+                                                    error: function (error) {
+                                                        location.href = '/Lamp/User/Login';
+                                                    }
+                                                })
+                                            },
+                                            error: function (error) {
+                                                if (error.status == 200) {
+                                                    $.ajax({
+                                                        type: "POST",
+                                                        cache: false,//拒绝缓存
+                                                        async: false,//异步提交
+                                                        url: '/Lamp/Main/ConfigMap?map=AMap',
+                                                        data: { map: "AMap" },
+                                                        dataType: 'Json',
+                                                        success: function (data2) {
+                                                            location.reload(true);
+                                                        },
+                                                        error: function (error) {
+                                                            location.href = '/Lamp/User/Login';
+                                                        }
+                                                    })
+                                                }
+                                                else {
+                                                    alert("无法访问AMap地图，停止切换");
+                                                }
+                                            }
+                                        })
+                                    }
+                                </script>
+                                <ul class="menu-overlay-nav text-uppercase">
+
+                                    <li>
+                                        <a href="#" onclick="ToAMap()"> 高德地图 </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" onclick="ToGoogle()"> Google地图 </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="@Url.Action("Index", "Main", null)"> GIS显示 </a>
+                                    </li>
+                                    @*<li>
+                                            <a href="/Lamp/Device">设备管理</a>
+                                        </li>*@
+                                    @*<li>
+                                            <a href="@Url.Action("Index", "TimeControl", null)">时控设置</a>
+                                        </li>*@
+                                    <li>
+                                        <a href="@Url.Action("AlarmInfos", "LayoutMetronic", null)">报表查询</a>
+                                    </li>
+
+                                    <li>
+                                        <a href="@Url.Action("Index", "FailureRate", null)">统计查询</a>
+                                    </li>
+                                    @*<li>
+                                            <a href="@Url.Action("Index", "HostInfoHistory", null)">主机查询</a>
+                                        </li>*@
+                                    @*<li>
+                                            <a href="#">参数设置</a>
+                                        </li>*@
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="menu-bg-overlay">
+                    <button class="menu-close">&times;</button>
+                </div>
+                <!-- the overlay element -->
+            </div>
+            <!-- END NAV TRIGGER -->
+            <!-- BEGIN LOGO -->
+            <div class="page-logo">
+                <a href="/Lamp/Main/">
+                    <img src="~/Image/Login/@ViewBag.logoMain" alt="logo" class="logo-default" />
+                </a>
+            </div>
+            @{var alarmInfo = (List<Models.HostInfoVM>)ViewBag.allAlarmhostlist;}
+            <!-- END LOGO -->
+            <!-- BEGIN TOP NAVIGATION MENU -->
+            <div class="top-menu">
+                <ul class="nav navbar-nav pull-right">
+                    <!-- BEGIN NOTIFICATION DROPDOWN -->
+                    <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
+                    <li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar" style="display:none;">
+                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                            <i class="icon-envelope-open"></i>
+                            <span class="badge badge-success"> 7 </span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="external">
+                                <h3>
+                                    <span class="bold">12 条记录</span> 通知
+                                </h3>
+                                <a href="#">更多</a>
+                            </li>
+                            <li>
+                                <ul class="dropdown-menu-list scroller" style="height: 250px;" data-handle-color="#637283">
+                                    <li>
+                                        <a href="javascript:;">
+                                            <span class="time">刚刚</span>
+                                            <span class="details">
+                                                <span class="label label-sm label-icon label-success">
+                                                    <i class="fa fa-plus"></i>
+                                                </span> 苏州限购了
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:;">
+                                            <span class="time">3 分钟前</span>
+                                            <span class="details">
+                                                <span class="label label-sm label-icon label-danger">
+                                                    <i class="fa fa-bolt"></i>
+                                                </span> 纽克斯拔河比赛
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:;">
+                                            <span class="time">昨天</span>
+                                            <span class="details">
+                                                <span class="label label-sm label-icon label-warning">
+                                                    <i class="fa fa-bell-o"></i>
+                                                </span> 纽克斯半年会议
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:;">
+                                            <span class="time">今年10月5日</span>
+                                            <span class="details">
+                                                <span class="label label-sm label-icon label-info">
+                                                    <i class="fa fa-bullhorn"></i>
+                                                </span> 软件上线
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:;">
+                                            <span class="time">今年8月1日</span>
+                                            <span class="details">
+                                                <span class="label label-sm label-icon label-danger">
+                                                    <i class="fa fa-bolt"></i>
+                                                </span> 发布测试版
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:;">
+                                            <span class="time">去年1月1日</span>
+                                            <span class="details">
+                                                <span class="label label-sm label-icon label-danger">
+                                                    <i class="fa fa-bolt"></i>
+                                                </span> 开始此项目
+                                            </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- END NOTIFICATION DROPDOWN -->
+                    <!-- BEGIN INBOX DROPDOWN -->
+                    <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
+                    <li class="dropdown dropdown-extended dropdown-inbox" id="header_inbox_bar">
+
+                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                            <i class="icon-bell"></i>
+                            <span id="salarm_1" class="badge badge-danger">@(alarmInfo.Count > 9 ? "9+" : alarmInfo.Count.ToString()) </span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="external">
+                                <h3>
+                                    发生
+                                    <span id="salarm_2" class="bold">@(alarmInfo.Count > 9 ? "9+" : alarmInfo.Count.ToString()) </span> 个报警
+                                </h3>
+                                @*<a href="@Url.Action("AlarmInfos", "LayoutMetronic", null)">详细</a>*@
+                            </li>
+                            <li>
+                                <ul class="dropdown-menu-list scroller" style="height: 275px;" data-handle-color="#637283" id="AlarmUL">
+                                    @foreach (var f in alarmInfo)
+                                    {
+
+                                        <li class="media" id="@f.GUID">
+                                            <a href="@Url.Action("AlarmInfos", "LayoutMetronic", new { Area = "Lamp", sGUID = @f.GUID })">
+                                                <div class="todo-tasklist-item">
+                                                    <img class="todo-userpic pull-left" src="/Image/Base/alarm.png" width="27px" height="27px">
+                                                    <div class="todo-tasklist-item-title">
+                                                        @f.Name
+                                                        <span class="todo-tasklist-badge badge badge-roundless pull-right">@f.GroupName</span>
+
+                                                    </div>
+                                                    <div class="todo-tasklist-controls pull-left">
+                                                        <span class="todo-tasklist-date">
+                                                            <i class="fa fa-calendar"></i>@f.UpdateTime
+                                                        </span>
+
+                                                    </div>
+                                                    <div class="todo-tasklist-controls pull-right">
+                                                        <span class="todo-tasklist-badge badge badge-roundless pull-right">单灯报警:@f.hostByAlarmLightCount</span>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    }
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- END INBOX DROPDOWN -->
+                    <!-- BEGIN USER LOGIN DROPDOWN -->
+                    <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
+                    <li class="dropdown dropdown-user">
+                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                            <div class="dropdown-user-inner" style="background:rgba(255, 255, 255, 0.1)">
+                                <span class="username username-hide-on-mobile"> @(ViewBag.UserName) </span>
+                                <img class="img-circle" alt="" src="~/Image/Login/Admin_s.png" />
+                            </div>
+                        </a>
+
+                        <ul class="dropdown-menu dropdown-menu-default">
+                            <li>
+                                <a style="margin-top:5px" href="@Url.Action("UserInfo","Shared",new {Area="Lamp"})">
+                                    <i class="icon-user"></i> 用户信息
+                                </a>
+                            </li>
+                            @*<li>
+                                    <a data-target="#updPsd" data-toggle="modal">
+                                        <i class="icon-calendar"></i> 我的计划
+                                    </a>
+                                </li>*@
+                            <li class="divider"> </li>
+                            <li>
+                                <a data-target="#prjinfo" data-toggle="modal" id="changepassword" href="@Url.Action("ChangePassword", "Shared", new { Area = "Lamp"})">
+                                    <i class="icon-lock"></i> 修改密码
+                                </a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Exit", "LayoutMetronic", new { Area = "Lamp"})">
+                                    <i class="icon-key"></i> 退出
+                                </a>
+
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- END USER LOGIN DROPDOWN -->
+                </ul>
+            </div>
+            <!-- END TOP NAVIGATION MENU -->
+        </div>
+        <!-- END HEADER INNER -->
+    </div>
+    <!-- END HEADER -->
+    <!-- BEGIN HEADER & CONTENT DIVIDER -->
+    <div class="clearfix"> </div>
+    <!-- END HEADER & CONTENT DIVIDER -->
+    <!-- BEGIN CONTAINER -->
+    <div class="page-container page-content-inner page-container-bg-solid">
+        <!-- BEGIN CONTENT -->
+        <div id="CurrPages" class="container-fluid container-lf-space">
+            <!-- BEGIN PAGE BASE CONTENT -->
+            @RenderBody()
+            <!-- END PAGE BASE CONTENT -->
+        </div>
+        <!-- END CONTENT -->
+    </div>
+    <!-- END CONTAINER -->
+    <!-- BEGIN QUICK SIDEBAR -->
+    <a href="javascript:;" class="page-quick-sidebar-toggler">
+        <i class="icon-login"></i>
+    </a>
+    <div class="page-quick-sidebar-wrapper" data-close-on-body-click="false">
+        <div class="page-quick-sidebar">
+            <ul class="nav nav-tabs">
+                @*<li class="active">
+                        <a href="javascript:;" data-target="#quick_sidebar_tab_3" data-toggle="tab">
+                            回路控制
+                        </a>
+                    </li>*@
+                <li class="active">
+                    <a href="javascript:;" data-target="#quick_sidebar_tab_1" data-toggle="tab">
+                        单点控制
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:;" data-target="#quick_sidebar_tab_2" data-toggle="tab">
+                        群组控制
+                    </a>
+                </li>
+
+                @*<li class="dropdown">
+                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
+                            更多
+                            <i class="fa fa-angle-down"></i>
+                        </a>
+                        <ul class="dropdown-menu pull-right">
+                            <li>
+                                <a href="javascript:;" data-target="#quick_sidebar_tab_3" data-toggle="tab">
+                                    <i class="icon-bell"></i> 报警
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:;" data-target="#quick_sidebar_tab_3" data-toggle="tab">
+                                    <i class="icon-info"></i> 通知
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:;" data-target="#quick_sidebar_tab_3" data-toggle="tab">
+                                    <i class="icon-speech"></i> 活动
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="javascript:;" data-target="#quick_sidebar_tab_3" data-toggle="tab">
+                                    <i class="icon-settings"></i> 设置
+                                </a>
+                            </li>
+                        </ul>
+                    </li>*@
+            </ul>
+            <div class="tab-content">
+                <div class="active tab-pane page-quick-sidebar-chat" id="quick_sidebar_tab_1">
+                    <div class="page-quick-sidebar-chat-users" data-rail-color="#ddd" data-wrapper-class="page-quick-sidebar-list">
+                        <h3 class="list-heading">目标主控</h3>
+                        <div class="row">
+                            <div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1">
+                                <select id="selecthostinfo" class="form-control input-sm select2-multiple"></select>
+                            </div>
+                        </div>
+                        <h3 class="list-heading margin-top-10">目标单灯</h3>
+                        <input id="selectlightguid" hidden="hidden" />
+                        <div class="row">
+                            <div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1">
+                                <select id="selectlightinfo" class="form-control input-sm select2-multiple"></select>
+                            </div>
+                        </div>
+                        <h3 class="list-heading margin-top-10">目标状态</h3>
+                        <div class="row" style="display:none">
+                            <div class="col-xs-3 col-xs-offset-2 col-sm-3 col-sm-offset-2 col-md-3 col-md-offset-2">
+                                <input id="modeswitch" type="checkbox" data-on-text="调光" data-off-text="开关" checked data-on-color="info" data-off-color="success" class="make-switch" data-size="small">
+                            </div>
+                            <div class="col-xs-3 col-xs-offset-1 col-sm-3 col-sm-offset-1 col-md-3 col-md-offset-1">
+                                <input id="lightswitch" type="checkbox" data-on-text="打开" data-off-text="关闭" checked data-on-color="info" data-off-color="default" class="make-switch" data-size="small">
+                            </div>
+                        </div>
+                        <div id="slider1" class="row margin-top-10">
+                            <div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1">
+                                <input id="range0" type="text" />
+                            </div>
+                        </div>
+                        <div class="row margin-top-30">
+                            <div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1">
+                                <a id="lightsend" class="btn default btn-block" data-target="#static" data-toggle="modal">发送</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="static" aria-hidden="true" style="z-index: 100000;vertical-align:central" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div id="loadicon" class="modal-body" style="width:140px; position: absolute;left: 50%;top: 50%;margin-left:-70px;margin-top:-20px;background-color:white; -moz-border-radius: 10px;-webkit-border-radius: 10px;border-radius: 10px;">
+                            <img id="iconimage" src="/UILib/Metronic/assets/global/img/loading-spinner-grey.gif">
+                            <span id="icontext">&nbsp;&nbsp;正在下放！</span>
+                            <a id="callform_modal3" data-target="#prjinfo" href="Main/GetAllState" data-toggle="modal" hidden="hidden"></a>
+                            <a id="cancle" data-dismiss="modal" hidden="hidden"></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane page-quick-sidebar-alerts" id="quick_sidebar_tab_2">
+                    <div class="page-quick-sidebar-alerts-list">
+                        <h3 class="list-heading">目标主控</h3>
+                        <div class="row">
+                            <div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1">
+                                <select id="selecthostinfo1" class="form-control input-sm select2-multiple"></select>
+                            </div>
+                        </div>
+                        <h3 class="list-heading margin-top-10">目标群组</h3>
+                        <input id="selectlightgroupguid" hidden="hidden" />
+                        <div class="row">
+                            <div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1">
+                                <select id="selectlightgroupinfo" class="form-control input-sm select2-multiple"></select>
+                            </div>
+                        </div>
+                        <h3 class="list-heading margin-top-10">目标状态</h3>
+                        <div class="row" style="display:none">
+                            <div class="col-xs-3 col-xs-offset-2 col-sm-3 col-sm-offset-2 col-md-3 col-md-offset-2">
+                                <input id="modeswitch1" type="checkbox" data-on-text="调光" data-off-text="开关" checked data-on-color="info" data-off-color="success" class="make-switch" data-size="small">
+                            </div>
+                            <div class="col-xs-3 col-xs-offset-1 col-sm-3 col-sm-offset-1 col-md-3 col-md-offset-1">
+                                <input id="lightswitch1" type="checkbox" data-on-text="打开" data-off-text="关闭" checked data-on-color="info" data-off-color="default" class="make-switch" data-size="small">
+                            </div>
+                        </div>
+                        <div id="slider2" class="row margin-top-10">
+                            <div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1">
+                                <input id="range1" type="text" />
+                            </div>
+                        </div>
+                        <div class="row margin-top-30">
+                            <div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1">
+                                <a id="groupsend" class="btn default btn-block" data-target="#static" data-toggle="modal">发送</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane page-quick-sidebar-alerts" style="display:none" id="quick_sidebar_tab_3">
+                    <div class="page-quick-sidebar-alerts-list">
+                        <h3 class="list-heading">目标主控</h3>
+                        <input id="selectcircuitguid" hidden="hidden" />
+                        <div class="row">
+                            <div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1">
+                                <select id="selecthostinfo2" class="form-control input-sm select2-multiple"></select>
+                            </div>
+                        </div>
+                        <h3 class="list-heading margin-top-10">目标回路</h3>
+                        <div class="row">
+                            <div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1">
+                                <select id="selectcircuit" class="form-control input-sm select2-multiple">
+                                </select>
+                            </div>
+                        </div>
+                        <h3 class="list-heading margin-top-10">目标状态</h3>
+                        <div class="row margin-top-10">
+                            <div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1">
+                                <button id="Open" data-target="#static" data-toggle="modal" class="btn default col-xs-5 col-sm-5 col-md-5" style="">闭合</button>
+                                <button id="Close" data-target="#static" data-toggle="modal" class="btn default col-xs-5 col-sm-5 col-md-5 col-xs-offset-2 col-sm-offset-2 col-md-offset-2">断开</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- END QUICK SIDEBAR -->
+    <!-- BEGIN FOOTER -->
+    @*<div class="page-footer">
+            <div class="page-footer-inner container-fluid container-lf-space">
+                <p class="page-footer-copyright">
+                    2016 &copy; Lumlux
+                    <a href="http://www.lumlux.cn" target="_blank">Purchase Metronic!</a>
+                </p>
+            </div>
+            <div class="go2top">
+                <i class="icon-arrow-up"></i>
+            </div>
+        </div>*@
+    <!--------------------------添加/修改信息的弹出层---------------------------->
+    <div id="prjinfo" class="modal fade" style="z-index: 10051;vertical-align:central" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="margin-top:3%;">
+
+            <div class="modal-body" id="divDlg" style="width:730px;height:341.883px;position: absolute;left: 50%;margin-left:-365px;">
+            </div>
+        </div>
+    </div>
+
+    <!-- END FOOTER -->
+    <!-- BEGIN QUICK SIDEBAR TOGGLER -->
+    <button id="btnquicksidebar" type="button" class="quick-sidebar-toggler" data-toggle="collapse" @((!string.IsNullOrWhiteSpace(ViewBag.UserAuthority) && ViewBag.UserAuthority == "1") ? " style=display:none" : "")>
+        @*<span class="sr-only">Toggle Quick Sidebar</span>
+            <i class="icon-logout"></i>
+            <div class="quick-sidebar-notification">
+                <span class="badge badge-danger">7</span>
+            </div>*@
+        <span class="glyphicon glyphicon-send" style="font-size:18px;color:orange"> </span>
+    </button>
+    <!-- END QUICK SIDEBAR TOGGLER -->
+    <!--[if lt IE 9]>
+    <script src="/UILib/Metronic/assets/global/plugins/respond.min.js"></script>
+    <script src="/UILib/Metronic/assets/global/plugins/excanvas.min.js"></script>
+    <![endif]-->
+    <!-- BEGIN CORE PLUGINS -->
+    <script src="/UILib/Metronic/assets/global/plugins/jquery.min.js" type="text/javascript"></script>
+    <script src="/UILib/Metronic/assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="/UILib/Metronic/assets/global/plugins/js.cookie.min.js" type="text/javascript"></script>
+    <script src="/UILib/Metronic/assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
+    <script src="/UILib/Metronic/assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+    <script src="/UILib/Metronic/assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+    <script src="/UILib/Metronic/assets/global/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
+    <script src="/UILib/Metronic/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
+
+    <!-- END CORE PLUGINS -->
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+    <script src="/UILib/Metronic/assets/global/plugins/moment.min.js" type="text/javascript"></script>
+    <script src="/UILib/Metronic/assets/global/plugins/morris/morris.min.js" type="text/javascript"></script>
+    <script src="/UILib/Metronic/assets/global/plugins/morris/raphael-min.js" type="text/javascript"></script>
+    <script src="/UILib/Metronic/assets/global/plugins/mapplic/js/hammer.min.js" type="text/javascript"></script>
+    <script src="/UILib/Metronic/assets/global/plugins/mapplic/js/jquery.easing.js" type="text/javascript"></script>
+    <script src="/UILib/Metronic/assets/global/plugins/mapplic/js/jquery.mousewheel.js" type="text/javascript"></script>
+    <script src="/UILib/Metronic/assets/global/plugins/mapplic/mapplic/mapplic.js" type="text/javascript"></script>
+    <script src="/UILib/Metronic/assets/global/plugins/counterup/jquery.waypoints.min.js" type="text/javascript"></script>
+    <script src="/UILib/Metronic/assets/global/plugins/counterup/jquery.counterup.min.js" type="text/javascript"></script>
+    <script src="/UILib/Metronic/assets/global/plugins/jquery.sparkline.min.js" type="text/javascript"></script>
+    <!-- END PAGE LEVEL PLUGINS -->
+    @* select 2 *@
+    <script src="/UILib/Metronic/assets/global/plugins/select2/js/select2.full.min.js" type="text/javascript"></script>
+    <!-- BEGIN THEME GLOBAL SCRIPTS -->
+    <script src="/UILib/Metronic/assets/global/scripts/app.min.js" type="text/javascript"></script>
+    <!-- END THEME GLOBAL SCRIPTS -->
+    @* select 2 *@
+    <script src="/UILib/Metronic/assets/pages/scripts/components-select2.min.js" type="text/javascript"></script>
+    <script src="~/UILib/Metronic/assets/global/plugins/select2/js/select2.full.js" type="text/javascript"></script>
+    @* slider *@
+    <script src="/UILib/Metronic/assets/global/plugins/ion.rangeslider/js/ion.rangeSlider.min.js" type="text/javascript"></script>
+    <script src="/UILib/Metronic/assets/global/plugins/bootstrap-markdown/lib/markdown.js" type="text/javascript"></script>
+    <script src="/UILib/Metronic/assets/pages/scripts/components-ion-sliders.min.js" type="text/javascript"></script>
+    @* switch *@
+    <script src="/UILib/Metronic/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
+    <script src="/UILib/Metronic/assets/pages/scripts/components-bootstrap-switch.min.js" type="text/javascript"></script>
+    @*modal*@
+    <script src="/UILib/Metronic/assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js" type="text/javascript"></script>
+    <script src="/UILib/Metronic/assets/global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js" type="text/javascript"></script>
+    <!-- BEGIN PAGE LEVEL SCRIPTS -->
+    <script src="/UILib/Metronic/assets/pages/scripts/dashboard.min.js" type="text/javascript"></script>
+    <!-- END PAGE LEVEL SCRIPTS -->
+    <!-- BEGIN THEME LAYOUT SCRIPTS -->
+    <script src="/UILib/Metronic/assets/layouts/layout7/scripts/layout.min.js" type="text/javascript"></script>
+    <script src="/UILib/Metronic/assets/layouts/global/scripts/quick-sidebar.min.js" type="text/javascript"></script>
+
+
+
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+    <script src="/UILib/Metronic/assets/global/plugins/cubeportfolio/js/jquery.cubeportfolio.min.js" type="text/javascript"></script>
+
+    <script src="/UILib/Metronic/assets/pages/scripts/portfolio-2.min.js" type="text/javascript"></script>
+    <script src="/UILib/Metronic/assets/apps/scripts/inbox.min.js" type="text/javascript"></script>
+
+    <script src="/Scripts/Lamp/LayoutPage.js" type="text/javascript"></script>
+
+    @*<script type="text/javascript" src="/Scripts/Lamp/GetAllState.js"></script>*@
+
+    <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")" type="text/javascript"></script>
+
+    @*<script src="/UILib/Metronic/assets/global/plugins/clockface/js/clockface.js" type="text/javascript"></script>
+        <script src="/UILib/Metronic/assets/global/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js" type="text/javascript"></script>*@
+
+
+    <!-- END THEME LAYOUT SCRIPTS -->
+    @RenderSection("MainJS", false)
+    <!--------------------------添加/修改信息的弹出层---------------------------->
+
+</body>
+</html>

@@ -1,0 +1,6 @@
+field1   // 太阳能电压
+field2   // 电压
+field3   // 电流
+field4   // 功率
+field5   // 温度
+field6   // 电压百分比

@@ -1,0 +1,38 @@
+﻿<mui:ModernDialog x:Class="Admin.LoginDlg"
+                  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+                  xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+                  xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+                  mc:Ignorable="d" 
+                  Width="300"
+                  d:DesignHeight="300" d:DesignWidth="300"
+                  Title="ModernDialog">
+
+    <Grid Style="{StaticResource ContentRoot}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <StackPanel>
+            <TextBlock Text="身份认证" Style="{StaticResource Heading2}" Margin="0,0,0,8" />
+            <mui:BBCodeBlock BBCode="请输入需要登陆的用户名与密码，如遗忘，请联系相关技术人员进行密码重置。" Margin="0,0,0,16"/>
+        </StackPanel>
+        <Grid Name="gridForm" Grid.Row="1" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="2*" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Margin="0,0,5,0" Text="帐号：" HorizontalAlignment="Right" VerticalAlignment="Center" />
+            <TextBox Name="txtName" Text="administrator" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Width="160" />
+            <TextBlock Margin="0,0,5,0" Grid.Row="1" Grid.Column="0" Text="密码：" HorizontalAlignment="Right" VerticalAlignment="Center" />
+            <PasswordBox Name="txtPassword" Password="Aa123456" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Width="160" />
+        </Grid>
+    </Grid>
+
+</mui:ModernDialog>

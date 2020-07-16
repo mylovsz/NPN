@@ -1,0 +1,297 @@
+﻿@{
+    ViewBag.Title = "主机信息查询";
+    Layout = "~/Areas/Lamp/Views/Shared/_LayoutPageMain.cshtml";
+}
+
+<link rel="shortcut icon" href="favicon.ico" />
+@{var alarmInfo = (List<LumluxSY.Areas.Lamp.Models.AlarmInfo>)ViewBag.Alarms;}
+  @*  @{var alarmDemo = (List<LumluxSY.Areas.Lamp.Models.PrjectSetInfoVM>)ViewBag.AlarmDemos;}
+    @{var allHost = (List<LumluxSSYDB.Model.tHostInfo>)ViewBag.vHost;}*@
+<!-- END HEAD -->
+<input id="hhhostGUID" name="hostGUID" type="hidden" />
+
+<!-- BEGIN CHART PORTLET-->
+<div class="col-md-12">
+    <!-- BEGIN EXAMPLE TABLE PORTLET-->
+    <div class="portlet light bordered" style="margin:10px">
+        <div class="portlet-title">
+            <div class="caption font-dark">
+                <i class="fa fa-table font-dark"></i>
+                <span class="caption-subject bold uppercase"> </span>
+                <span id="ddsConputerName" style="font-size:12px;color:gray;">&nbsp;-&nbsp;主机信息查询</span>
+            </div>
+
+        </div>
+        <div class="portlet-body">
+
+            <div id="sample_1_wrapper" class="dataTables_wrapper no-footer">
+                <div class="row">
+                    <div id="hhdivHost" class="col-md-3 col-sm-3">
+
+
+                        <div class="input-group  select2-bootstrap-prepend">
+                            @*<span class="input-group-btn">
+                                    <button class="btn btn-default" type="button" data-select2-open="xx"> 目标主机 </button>
+                                </span>*@
+                            <select id="hhselectedHost" class="form-control select2-multiple" multiple>
+                                
+                            </select>
+                        </div>
+
+                    </div>
+
+                    <div id="hhdivAlarm" class="col-md-3 col-sm-3">
+
+                        @*<div class="input-group select2-bootstrap-prepend"></div>*@
+                        @*<span class="input-group-btn">
+                                <button class="btn btn-default" type="button" data-select2-open="yy"> 报警信息 </button>
+                            </span>*@
+                        <select id="hhselectedAlarm" class="form-control select2-multiple" multiple>
+                            
+                        </select>
+
+
+                    </div>
+
+                    <div class="col-md-3 col-sm-3">
+
+
+                        <div id="hhdivPickDate" class="actions">
+                            @*<label>&nbsp;&nbsp;&nbsp;报警时间：</label>*@
+                            <div id="hhreportrange" class="btn default" data-original-title="选择有效日期" title="选择有效日期">
+                                <i class="fa fa-calendar"></i> &nbsp;
+                                <span></span>
+                                <b class="fa fa-angle-down"></b>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                    <div class="col-md-1 col-sm-1">
+                        <div class="btn-group pull-right">
+
+
+                            <button id="hhbtnSeach" style=" float:right" class="btn green  btn-outline dropdown-toggle">查询</button>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+
+                    @*<table class="table table-striped table-bordered table-hover dt-responsive" width="100%" id="sample_1">
+                <thead>
+                    <tr>
+                        <th class="all">First name</th>
+                        <th class="min-phone-l">Last name</th>
+                        <th class="min-tablet">Position</th>
+                        <th class="none">Office</th>
+                        <th class="none">Age</th>
+                        <th class="none">Start date</th>
+                        <th class="desktop">Salary</th>
+                        <th class="none">Extn.</th>
+                        <th class="none">Extn.</th>
+                        <th class="none">Extn.</th>
+                        <th class="none">Extn.</th>
+                        <th class="none">Extn.</th>
+                        <th class="none">Extn.</th>
+                        <th class="none">Extn.</th>
+                        <th class="none">Extn.</th>
+                        <th class="none">Extn.</th>
+                        <th class="none">Extn.</th>
+                        <th class="none">Extn.</th>
+                        <th class="none">Extn.</th>
+                        <th class="none">Extn.</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Tiger</td>
+                        <td>Nixon</td>
+                        <td>System Architect</td>
+                        <td>Edinburgh</td>
+                        <td>61</td>
+                        <td>2011/04/25</td>
+                        <td>$320,800</td>
+                        <td>5421</td>
+                        <td>Tiger</td>
+                        <td>Nixon</td>
+                        <td>System Architect</td>
+                        <td>Edinburgh</td>
+                        <td>61</td>
+                        <td>2011/04/25</td>
+                        <td>$320,800</td>
+                        <td>5421</td>
+                        <td>Tiger</td>
+                        <td>Nixon</td>
+                        <td>System Architect</td>
+                        <td>Edinburgh</td>
+                    </tr>
+                </tbody>
+            </table>*@
+
+                    @*<div class="demo-container">
+                        <div id="placeholder1" class="demo-placeholder"></div>
+
+                    </div>
+
+                    <p>
+                        <button class="fetchSeries">First dataset</button>
+                        [ <a href="/Lamp/HostInfoHistory/GetJsonData">see data</a> ]
+                        <span></span>
+                    </p>
+
+                    <p>
+                        <button class="dataUpdate">Poll for data</button>
+                    </p>*@
+
+
+
+
+                    <table id="HostHistoryTable" class="table table-striped table-bordered text-center table-advance table-hover" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th class="text-center">主机名</th>
+                                <th class="text-center">状态类型</th>
+                                <th class="text-center">状态</th>
+                                <th class="text-center">开始时间</th>
+                                <th class="text-center">结束时间</th>
+                            </tr>
+                        </thead>
+                    </table>
+                    <div class="row">
+                        <div class="col-md-5 col-sm-5">
+                            <div class="dataTables_info" id="sample_1_info" role="status" aria-live="polite"></div>
+                        </div>
+                        <div class="col-md-7 col-sm-7">
+                            <div class="dataTables_paginate paging_bootstrap_full_number" id="sample_1_paginate">
+                                <div class="pagination-panel" style=" float:right">
+                                    共 <span id="hhiAlCount" class="pagination-panel-total"> 600</span>条报警信息&nbsp;&nbsp;&nbsp;
+                                    <input id="hhpageCount" type="hidden" value="1" />
+                                    当前页
+
+                                    @*<a href="@Url.Action("TestData", "AlarmSerach", new { pageIndex = Model.PageIndex - 1 })" class="btn btn-sm default prev"><i class="fa fa-angle-left"></i></a>*@
+
+                                    <a id="hhaprev" class="btn btn-sm default prev"><i class="fa fa-angle-left"></i></a>
+
+
+
+                                    <em id="hhemPrev" style="color:Gray"><i class="fa fa-angle-left  "></i></em>
+
+                                    <input type="text" id="hhtoPage" name="hhtoPage" class="pagination-panel-input form-control input-sm input-inline input-mini" value="@ViewBag.CurPageIndex" maxlenght="5" style="text-align:center; margin: 0 5px;" />
+
+                                    <a id="hhanext" class="btn btn-sm default next"><i class="fa fa-angle-right"></i></a>
+
+
+
+
+                                    @*//<a href="@Url.Action("TestData", "AlarmSerach", new {  pageIndex = Model.PageIndex + 1 })" class="btn btn-sm default next"><i class="fa fa-angle-right"></i></a>*@
+
+
+                                    <em id="hhemNext" style="color:Gray"><i class="fa fa-angle-right"></i></em>
+
+                                    共
+                                    <span id="hhiPage" class="pagination-panel-total">60</span>页
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END EXAMPLE TABLE PORTLET-->
+    </div>
+
+
+</div>
+@section MainCSS
+{
+    <link src="/UILib/Metronic/assets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.css" rel="stylesheet" type="text/css" />
+    <link href="/UILib/Metronic/assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
+    <link href="/UILib/Metronic/assets/global/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css" rel="stylesheet" type="text/css" />
+    <link href="/UILib/Metronic/assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css" />
+    <link href="/UILib/Metronic/assets/global/plugins/clockface/css/clockface.css" rel="stylesheet" type="text/css" />
+    <link href="/UILib/Metronic/assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/UILib/Metronic/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css" />
+
+    
+    <style type="text/css">
+        table.dataTable.no-footer {
+	    border-bottom: 0px;
+    }
+    </style>
+
+    <style type="text/css">
+        input::-ms-clear {
+            display: none;
+        }
+
+        input {
+            outline: none;
+        }
+    </style>
+
+    <style type="text/css">
+               .lightinfo > tbody > tr > td {
+            padding: 0px;
+        }
+    </style>
+
+    <style type="text/css">
+        td.details-control {
+            background: url('/Image/Base/details_open.png') no-repeat center center;
+            cursor: pointer;
+        }
+        tr.shown td.details-control {
+            background: url('/Image/Base/details_close.png') no-repeat center center;
+        }
+        /*.demo-placeholder {
+	width: 100%;
+	height: 100%;
+	font-size: 14px;
+	line-height: 1.2em;
+}
+
+        .demo-container {
+	box-sizing: border-box;
+	width: 850px;
+	height: 450px;
+	padding: 20px 15px 15px 15px;
+	margin: 15px auto 30px auto;
+	border: 1px solid #ddd;
+	background: #fff;
+	background: linear-gradient(#f6f6f6 0, #fff 50px);
+	background: -o-linear-gradient(#f6f6f6 0, #fff 50px);
+	background: -ms-linear-gradient(#f6f6f6 0, #fff 50px);
+	background: -moz-linear-gradient(#f6f6f6 0, #fff 50px);
+	background: -webkit-linear-gradient(#f6f6f6 0, #fff 50px);
+	box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+	-o-box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+	-ms-box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+	-moz-box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+	-webkit-box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}*/
+    </style>
+
+}
+
+@section MainJS{
+            <!-- END THEME GLOBAL SCRIPTS -->
+    <!-- BEGIN PAGE LEVEL SCRIPTS -->
+    @*<script src="/UILib/Metronic/assets/global/plugins/flot/jquery.flot.min.js" type="text/javascript"></script>*@
+    <script src="/UILib/Metronic/assets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.js" type="text/javascript"></script>
+    <script src="/UILib/Metronic/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
+    <script src="/UILib/Metronic/assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
+    <script src="/Scripts/Lamp/components-date-time-pickers.js" type="text/javascript"></script>
+    @*<script src="/Scripts/Lamp/Amstock.js" type="text/javascript"></script>*@
+    <script src="/UILib/Metronic/assets/global/scripts/datatable.min.js" type="text/javascript"></script>
+    @*<script src="~/UILib/Metronic/assets/pages/scripts/table-datatables-fixedheader.min.js" type="text/javascript"></script>*@
+    @*<script src="/UILib/Metronic/assets/pages/scripts/table-datatables-responsive.min.js" type="text/javascript"></script>*@
+    <script src="~/Scripts/Lamp/HostHistory.js" type="text/javascript"></script>
+    <script src="/UILib/Metronic/assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
+    <script src="/UILib/Metronic/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
+        }
+
+

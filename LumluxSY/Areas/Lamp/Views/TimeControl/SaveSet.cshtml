@@ -1,0 +1,164 @@
+﻿@{
+    ViewBag.Title = "SaveSet";
+    Layout = null;
+}
+@using (Ajax.BeginForm("SaveSet", "TimeControl", new { Area = "Lamp" }, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "divDlg", HttpMethod = "Post" }))
+{
+
+    <div class="modal-content" style="width:600px;min-height:331.883px;">
+        <div class="modal-header" style="background-color:#bfcad1;">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+            <h4 class="modal-title"><i class="icon-pencil"></i> 时控修改 </h4>
+        </div>
+        <div class="modal-body">
+            @*<div class="row"></div>*@
+            <div id="fWater" class="form-horizontal">
+                <div class="form-group">
+                    <label class="control-label col-md-2">开始时间:</label>
+                    <div class="col-md-5">
+                        <div class="input-group">
+                            <input id="startTime" name="startTime" type="text" class="form-control timepicker timepicker-24">
+                            <span class="input-group-btn">
+                                <button class="btn default" type="button">
+                                    <i class="fa fa-clock-o"></i>
+                                </button>
+                            </span>
+
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="form-group">
+                    <label id="startError"></label>
+                    <label class="control-label col-md-2">结束时间:</label>
+                    <div class="col-md-4">
+                        <div class="input-group">
+                            <input id="endTime" name="endTime" value="@ViewBag.dendTIme" type="text" class="form-control timepicker timepicker-24">
+                            <span class="input-group-btn">
+                                <button class="btn default" type="button">
+                                    <i class="fa fa-clock-o"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                    <span style=" color:red">@ViewBag.dendTimeEro</span>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">开启时间:</label>
+                    <div class="col-md-4">
+                        <div class="input-group">
+                            <input id="iOnTime" name="iOnTime" value="@ViewBag.donTime" type="text" class="form-control timepicker timepicker-24">
+                            <span class="input-group-btn">
+                                <button class="btn default" type="button">
+                                    <i class="fa fa-clock-o"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                    <span style=" color:red">@ViewBag.donTimeEro</span>
+                </div>
+
+                <div class="form-group">
+
+                    <label class="control-label col-md-2">关闭时间:</label>
+                    <div class="col-md-4">
+                        <div class="input-group">
+                            <input id="iOffTime" name="iOffTime" value="@ViewBag.doffTime" type="text" class="form-control timepicker timepicker-24">
+                            <span class="input-group-btn">
+                                <button class="btn default" type="button">
+                                    <i class="fa fa-clock-o"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                    <span style=" color:red">@ViewBag.doffTimeEro</span>
+                </div>
+                
+
+
+
+
+
+
+
+
+
+                @*<div class="col-md-12" style="margin-left:30px;">
+                    <span style=" color:red">@ViewBag.ChangePasswordResult</span>
+                    </div>*@
+            </div>
+
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn dark btn-outline" data-dismiss="modal">关闭</button>
+            <button type="submit" class="btn green">保存</button>
+        </div>
+
+    </div>
+
+
+}
+
+
+
+<script type="text/javascript">
+    function test() {
+
+
+
+
+
+        var ComponentsDateTimePickers = function () {
+
+
+            var handleTimePickers = function () {
+
+                if (jQuery().timepicker) {
+                    $('.timepicker-default').timepicker({
+                        autoclose: true,
+                        showSeconds: true,
+                        minuteStep: 1
+                    });
+
+                    $('.timepicker-no-seconds').timepicker({
+                        autoclose: true,
+                        minuteStep: 5
+                    });
+
+                    $('.timepicker-24').timepicker({
+                        autoclose: true,
+                        minuteStep: 5,
+                        showSeconds: false,
+                        showMeridian: false
+                    });
+
+                    // handle input group button click
+                    $('.timepicker').parent('.input-group').on('click', '.input-group-btn', function (e) {
+                        e.preventDefault();
+                        $(this).parent('.input-group').find('.timepicker').timepicker('showWidget');
+                    });
+                }
+            }
+
+
+            return {
+                //main function to initiate the module
+                init: function () {
+                    handleTimePickers();
+
+                }
+            };
+
+        }();
+
+        if (App.isAngularJsApp() === false) {
+            jQuery(document).ready(function () {
+                ComponentsDateTimePickers.init();
+            });
+        }
+    }
+
+</script>

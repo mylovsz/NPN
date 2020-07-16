@@ -1,0 +1,33 @@
+﻿<mui:ModernDialog x:Class="Admin.Pages.SyncDataDlg"
+                  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+                  xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+                  xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+                  mc:Ignorable="d" 
+                  d:DesignHeight="300" d:DesignWidth="300" Loaded="ModernDialog_Loaded"
+                  Title="ModernDialog">
+
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <TextBlock HorizontalAlignment="Center" Name="txtTip" Text="同步地址信息" FontSize="20" />
+        <Grid Grid.Row="1" Name="gridProgress">
+            <mui:ModernProgressRing  IsActive="True" Width="80" Height="80"/>
+            <TextBlock Name="txtClock" Text="16" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" />
+        </Grid>
+        <Grid Grid.Row="1" Visibility="Hidden"  Name="gridInfo">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <TextBlock Name="txtInfo" HorizontalAlignment ="Center" VerticalAlignment="Center"></TextBlock>
+            <StackPanel Grid.Row="1">
+                <mui:ModernButton Name="btnRedo" EllipseDiameter="38" IconHeight="24" IconWidth="24" IconData="{StaticResource RedoIconData}" Click="btnRedo_Click" ToolTip="重新发送" HorizontalAlignment="Center" />
+            </StackPanel>
+        </Grid>
+    </Grid>
+
+</mui:ModernDialog>

@@ -1,0 +1,159 @@
+﻿@{
+    ViewBag.Title = "用户信息";
+    Layout = "~/Areas/Lamp/Views/Shared/_LayoutPageMain.cshtml";
+}
+<div class="page-content-wrapper" style="width:95%;margin-top:30px;margin-left:30px;">
+    <!-- BEGIN CONTENT BODY -->
+    <div style="background:#fff;">
+        <div class="row">
+            <div class="col-md-3 col-sm-12">
+                <!-- BEGIN PROFILE SIDEBAR -->
+                <div class="profile-sidebar" style="color: #eef1f5;">
+                    <!-- PORTLET MAIN -->
+                    <div class="portlet profile-sidebar-portlet " style="background-color:#eef1f5;">
+                        <!-- SIDEBAR USERPIC -->
+                        <div class="profile-userpic">
+                            <img src="/Image/Login/Admin_s.png" class="img-responsive" alt="">
+                        </div>
+                        <!-- END SIDEBAR USERPIC -->
+                        <!-- SIDEBAR USER TITLE -->
+                        <div class="profile-usertitle">
+                            <div class="profile-usertitle-name">@ViewBag.UserAlias</div>
+                        </div>
+                        <!-- END SIDEBAR USER TITLE -->
+                        <!-- END SIDEBAR BUTTONS -->
+                        <!-- SIDEBAR MENU -->
+                        <div class="profile-usermenu">
+                                <ul class="nav">
+                                    <li>
+                                        <a>
+                                            <i class="icon-user"></i> 用户名:@ViewBag.UserName
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a>
+                                            <i class="icon-earphones"></i> 电话:@ViewBag.UserPhone
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a>
+                                            <i class="icon-envelope"></i> 邮箱:@ViewBag.UserEmail
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a>
+                                            <i class="icon-settings"></i> 备注:@ViewBag.UserRemark
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a>
+                                            <i class="icon-calendar"></i> 创建时间:@ViewBag.UserCreateTime
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        <!-- END MENU -->
+                    </div>
+                    <!-- END PORTLET MAIN -->
+                    <!-- PORTLET MAIN -->
+                    <!-- END PORTLET MAIN -->
+                </div>
+                <!-- END BEGIN PROFILE SIDEBAR -->
+                <!-- BEGIN PROFILE CONTENT -->
+                </div>
+            <div class="col-md-9 col-sm-12">
+                <div class="profile-content" style="background-color: #eef1f5;">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- BEGIN PORTLET -->
+                            <div class="portlet" style="padding:12px 20px 15px;">
+                                <div class="portlet-title" style="border-bottom: 1px solid #c3bdbd;">
+                                    <div class="caption caption-md">
+                                        <i class="icon-bar-chart theme-font hide"></i>
+                                        <span class="caption-subject font-blue-madison bold uppercase">工程信息</span>
+                                        <span class="caption-helper hide">weekly stats...</span>
+                                    </div>
+                                </div>
+                                <div class="portlet-body">
+                                    <div class="row col-md-6">
+                                        <div class="col-md-12" style="margin-bottom:23.15px;margin-top:23.15px;">
+                                            <div class="form-group">
+                                                <label class="control-label col-md-5">工程名:</label>
+                                                <div class="col-md-7">
+                                                    <label id="ProjectName" class="control-label">@ViewBag.ProName</label>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-12" style="margin-bottom:23.15px;margin-top:23.15px;">
+                                            <div class="form-group">
+                                                <label class="control-label  col-md-5">创建人:</label>
+                                                <div class="col-md-7">
+                                                    <label class="control-label">@ViewBag.ProAuthor</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12" style="margin-bottom:23.15px;margin-top:23.15px;">
+                                            <div class="form-group">
+                                                <label class="control-label  col-md-5">经度:</label>
+                                                <div class="col-md-7">
+                                                    <label id="ProjectLng" class="control-label">@ViewBag.ProLng</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12" style="margin-bottom:23.15px;margin-top:23.15px;">
+                                            <div class="form-group">
+                                                <label class="control-label col-md-5">纬度:</label>
+                                                <div class="col-md-7">
+                                                    <label id="ProjectLat" class="control-label">@ViewBag.ProLat</label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12" style="margin-bottom:23.15px;margin-top:23.15px;">
+                                            <div class="form-group">
+                                                <label class="control-label col-md-5">备注:</label>
+                                                <div class="col-md-7">
+                                                    <label class="control-label">@ViewBag.ProRemark</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12" style="margin-bottom:23.15px;margin-top:23.15px;">
+                                            <div class="form-group">
+                                                <label class="control-label col-md-5">创建时间:</label>
+                                                <div class="col-md-7">
+                                                    <label class="control-label">@ViewBag.ProCreateTime</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row col-md-6">
+                                        <div style="margin-top:10px; min-height:400px;border:1px solid #c3bdbd; " id="gmap_marker">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- END PORTLET -->
+                        </div>
+                    </div>
+                </div>
+                <!-- END PROFILE CONTENT -->
+            </div>
+        </div>
+    </div>
+    <!-- END CONTENT BODY -->
+</div>
+@section MainCSS{
+    <link href="/UILib/Metronic/assets/global/plugins/jstree/dist/themes/default/style.min.css" rel="stylesheet" type="text/css" />
+}
+
+@section MainJS{
+    <script src="http://ditu.google.cn/maps/api/js?key=AIzaSyAc1YixAJuZBs7nnzCfBAxbwMKYexIU7sw&sensor=true" type="text/javascript"></script>
+    <script src="/UILib/Metronic/assets/global/plugins/gmaps/gmaps.min.js" type="text/javascript"></script>
+    <script src="/Scripts/Lamp/markerclusterer.js"></script>
+    <script src="/UILib/Metronic/assets/global/plugins/jstree/dist/jstree.min.js" type="text/javascript"></script>
+    <script src="/UILib/Metronic/assets/global/scripts/datatable.js" type="text/javascript"></script>
+    <script src="/UILib/Metronic/assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
+    <script src="/UILib/Metronic/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
+    <script src="~/Scripts/Lamp/UserInfo.js" type="text/javascript"></script>
+}

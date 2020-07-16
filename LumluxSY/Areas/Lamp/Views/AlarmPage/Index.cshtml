@@ -1,0 +1,168 @@
+﻿@{
+    ViewBag.Title = "报表查询";
+    Layout = "~/Areas/Lamp/Views/Shared/_LayoutPageMain.cshtml";
+}
+<!-- END THEME LAYOUT STYLES -->
+<link rel="shortcut icon" href="favicon.ico" />
+@{var alarmInfo = (List<LumluxSY.Areas.Lamp.Models.AlarmInfo>)ViewBag.Alarms;}
+@{var alarmDemo = (List<LumluxSY.Areas.Lamp.Models.PrjectSetInfoVM>)ViewBag.AlarmDemos;}
+@{var allHost = (List<LumluxSSYDB.Model.tHostInfo>)ViewBag.vHost;}
+<!-- END HEAD -->
+<input id="hostGUID" name="hostGUID" type="hidden" value="@ViewBag.sHostGUID" />
+<!-- BEGIN CHART PORTLET-->
+<div class="col-md-12">
+    <!-- BEGIN EXAMPLE TABLE PORTLET-->
+    <div class="portlet light bordered" style="margin:10px">
+        <div class="portlet-title">
+            <div class="caption font-dark">
+                <i class="fa fa-table font-dark"></i>
+                <span class="caption-subject bold uppercase">@ViewBag.HostNames </span>
+                <span id="sConputerName" style="font-size:12px;color:gray;">&nbsp;-&nbsp;报表查询</span>
+            </div>
+
+        </div>
+        <div class="portlet-body">
+
+            <div id="sample_1_wrapper" class="dataTables_wrapper no-footer">
+                <div class="row">
+                    <div class="col-md-4 col-sm-4">
+                        <input id="LightName" type="text" class="form-control" placeholder="请数入单灯名称(模糊查询)">
+                    </div>
+
+                    <div id="divAlarm" class="col-md-4 col-sm-4">
+
+
+                        <select id="selectedAlarm" class="form-control select2-multiple" multiple>
+                            @for (int i = 0; i < alarmDemo.Count; i++)
+                            {
+
+                                <option value="@alarmDemo[i].sKey">@alarmDemo[i].sDesc</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="row" style="margin-top:10px;">
+                    <div id="divHost" class="col-md-4 col-sm-4">
+                        <div class="input-group  select2-bootstrap-prepend">
+                            <select id="selectedHost" class="form-control select2-multiple" multiple>
+                                @for (int i = 0; i < allHost.Count; i++)
+                                {
+                                    if (i < 1)
+                                    {
+                                        <option value="@allHost[i].sGUID" selected="selected">@allHost[i].sName</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@allHost[i].sGUID">@allHost[i].sName</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4">
+                        <div id="divPickDate" class="actions">
+                            <div id="reportrange" class="btn default" data-original-title="选择有效日期" title="选择有效日期">
+                                <i class="fa fa-calendar"></i> &nbsp;
+                                <span></span>
+                                <b class="fa fa-angle-down"></b>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-sm-2">
+                        <div class="btn-group pull-right">
+                            <button id="btnSeach" style=" float:right" class="btn green  btn-outline dropdown-toggle">查询</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="table-scrollable">
+                        <table class="table table-striped table-bordered table-hover table-checkable order-column dataTable no-footer" id="sample_1" role="grid" aria-describedby="sample_1_info">
+                            <thead>
+                                <tr>
+                                    <th style="text-align:center">主机名称</th>
+                                    <th style="text-align:center"> 单灯名称 </th>
+                                    <th style="text-align:center"> 单灯型号 </th>
+                                    <th style="text-align:center"> 状态 </th>
+                                    <th style="text-align:center"> 记录时间 </th>
+                                    <th style="text-align:center"> 电压 </th>
+                                    <th style="text-align:center"> 电流 </th>
+                                    <th style="text-align:center"> 功率 </th>
+                                    <th style="text-align:center"> 太阳能电压 </th>
+                                    <th style="text-align:center"> 余量 </th>
+                                    <th style="text-align:center"> 温度 </th>
+                                </tr>
+                            </thead>
+                            @foreach (var Data in alarmInfo)
+                            {
+                                <tbody>
+                                    <tr>
+                                        <td style="text-align:center;">@Data.thost.sName</td>
+                                        <td style="text-align:center;">@Data.li.sName</td>
+                                        <td style="text-align:center;">@Data.li.sRemark</td>
+                                        <td style="text-align:center;">@Data.Fault</td>
+                                        <td style="text-align:center;">@Data.ls.dUpdateTime</td>
+                                        <td style="text-align:center;">@Data.ls.sSpareField2</td>
+                                        <td style="text-align:center;">@Data.ls.sSpareField3</td>
+                                        <td style="text-align:center;">@Data.ls.sSpareField4</td>
+                                        <td style="text-align:center;">@Data.ls.sSpareField1</td>
+                                        <td style="text-align:center;">@Data.ls.sSpareField6</td>
+                                        <td style="text-align:center;">@Data.ls.sSpareField5</td>
+                                    </tr>
+                                </tbody>
+                            }
+                        </table>
+                    </div><div class="row">
+                        <div class="col-md-5 col-sm-5">
+                            <div class="dataTables_info" id="sample_1_info" role="status" aria-live="polite"></div>
+                        </div>
+                        <div class="col-md-7 col-sm-7">
+                            <div class="dataTables_paginate paging_bootstrap_full_number" id="sample_1_paginate">
+                                <div class="pagination-panel" style=" float:right">
+                                    共 <span id="iAlCount" class="pagination-panel-total"> @ViewBag.iCount</span>条报警信息&nbsp;&nbsp;&nbsp;
+                                    <input id="pageCount" type="hidden" value="@ViewBag.iCount" />
+                                    当前页
+                                    <a id="aprev" class="btn btn-sm default prev"><i class="fa fa-angle-left"></i></a>
+                                    <em id="emPrev" style="color:Gray"><i class="fa fa-angle-left  "></i></em>
+
+                                    <input type="text" id="toPage" name="toPage" onkeyup="this.value=this.value.replace(/[^\d]/g,'');" class="pagination-panel-input form-control input-sm input-inline input-mini" value="@ViewBag.CurPageIndex" maxlenght="5" style="text-align:center; margin: 0 5px;" />
+
+                                    <a id="anext" class="btn btn-sm default next"><i class="fa fa-angle-right"></i></a>
+                                    <em id="emNext" style="color:Gray"><i class="fa fa-angle-right"></i></em>
+                                    共
+                                    <span id="iPage" class="pagination-panel-total">@ViewBag.iPage</span>页
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END EXAMPLE TABLE PORTLET-->
+    </div>
+</div>
+
+@section MainCSS
+{
+    <link src="/UILib/Metronic/assets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.css" rel="stylesheet" type="text/css" />
+    <link href="/UILib/Metronic/assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
+    <link href="/UILib/Metronic/assets/global/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css" rel="stylesheet" type="text/css" />
+    <link href="/UILib/Metronic/assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css" />
+    <link href="/UILib/Metronic/assets/global/plugins/clockface/css/clockface.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+        input::-ms-clear {
+            display: none;
+        }
+        input {
+            outline: none;
+        }
+    </style>
+
+}
+
+@section MainJS{
+    <script src="/UILib/Metronic/assets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.js" type="text/javascript"></script>
+    <script src="/UILib/Metronic/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
+    <script src="/UILib/Metronic/assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
+    <script src="/Scripts/Lamp/components-date-time-pickers.js" type="text/javascript"></script>
+    <script src="/Scripts/Lamp/AlarmSerach.js" type="text/javascript"></script>
+}

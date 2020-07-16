@@ -1,0 +1,24 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="LampService.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="GPRSPort" Type="System.UInt16" Scope="User">
+      <Value Profile="(Default)">30012</Value>
+    </Setting>
+    <Setting Name="GPRSIP" Type="System.String" Scope="User">
+      <Value Profile="(Default)">127.0.0.1</Value>
+    </Setting>
+    <Setting Name="GPRSHeadTimeout" Type="System.UInt32" Scope="User">
+      <Value Profile="(Default)">180</Value>
+    </Setting>
+    <Setting Name="ClientPort" Type="System.String" Scope="User">
+      <Value Profile="(Default)">40009</Value>
+    </Setting>
+    <Setting Name="ClientIP" Type="System.String" Scope="User">
+      <Value Profile="(Default)">127.0.0.1</Value>
+    </Setting>
+    <Setting Name="ClientHeadTimeout" Type="System.UInt32" Scope="User">
+      <Value Profile="(Default)">180</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

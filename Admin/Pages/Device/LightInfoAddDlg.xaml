@@ -1,0 +1,84 @@
+﻿<mui:ModernDialog x:Class="Admin.Pages.Device.LightInfoAddDlg"
+                  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+                  xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+                  xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+                  mc:Ignorable="d" 
+                  d:DesignHeight="300" d:DesignWidth="350"
+                  Title="批量添加">
+
+    <!-- Note: ModernDialog buttons are defined in the constructor of the code behind class -->
+    <Grid Margin="10" Grid.Column="1">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Column="1" x:Name="Form" Margin="5,0,5,0" Orientation="Vertical">
+            <StackPanel.Resources>
+                <Style TargetType="StackPanel">
+                    <Setter Property="Orientation" Value="Horizontal" />
+                    <Setter Property="Margin" Value="0,0,0,4" />
+                </Style>
+                <Style TargetType="Label" BasedOn="{StaticResource {x:Type Label}}">
+                    <Setter Property="Width" Value="80" />
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                </Style>
+                <Style TargetType="TextBox">
+                    <Setter Property="Width" Value="200" />
+                </Style>
+                <Style TargetType="CheckBox" BasedOn="{StaticResource {x:Type CheckBox}}">
+                    <Setter Property="Padding" Value="0,3" />
+                </Style>
+                <Style TargetType="RadioButton" BasedOn="{StaticResource {x:Type RadioButton}}">
+                    <Setter Property="Padding" Value="0,3" />
+                </Style>
+            </StackPanel.Resources>
+            <StackPanel>
+                <Label Content="单灯类型：" Target="{Binding ElementName=cbLightType}"/>
+                <ComboBox Name="cbLightType" SelectedIndex="0">
+                    <ComboBoxItem Content="太阳能单灯"/>
+                </ComboBox>
+            </StackPanel>
+            <StackPanel>
+                <Label Content="单灯型号：" Target="{Binding ElementName=txtLightVersion}"/>
+                <TextBox x:Name="txtLightVersion" />
+            </StackPanel>
+            <StackPanel>
+                <Label Content="起始地址：" Target="{Binding ElementName=txtStartID}"/>
+                <TextBox x:Name="txtStartID" />
+            </StackPanel>
+            <StackPanel>
+                <Label Content="结束地址：" Target="{Binding ElementName=txtEndID}"/>
+                <TextBox x:Name="txtEndID" />
+            </StackPanel>
+            <StackPanel>
+                <Label Content="所属组：" Target="{Binding ElementName=combLightGroupInfo}"/>
+                <ComboBox x:Name="combLightGroupInfo" Width="200" />
+            </StackPanel>
+            <StackPanel Margin="0,2,0,2">
+                <Label Content="开始经纬：" Target="{Binding ElementName=txtStartLightLng}"/>
+                <StackPanel Orientation="Vertical">
+                    <TextBox x:Name="txtStartLightLng" VerticalContentAlignment="Center" Width="170" />
+                    <TextBox x:Name="txtStartLightLat" VerticalContentAlignment="Center" Width="170" Margin="0,2,0,0"/>
+                </StackPanel>
+                <mui:ModernButton x:Name="btnStartMapSelect" Click="btnStartMapSelect_Click" Margin="5,0,0,0" IconData="{StaticResource MapSelectIconData}" />
+            </StackPanel>
+            <StackPanel Margin="0,2,0,2">
+                <Label Content="结束经纬：" Target="{Binding ElementName=txtLightLng}"/>
+                <StackPanel Orientation="Vertical">
+                    <TextBox x:Name="txtEndLightLng" VerticalContentAlignment="Center" Width="170" />
+                    <TextBox x:Name="txtEndLightLat" VerticalContentAlignment="Center" Width="170" Margin="0,2,0,0"/>
+                </StackPanel>
+                <mui:ModernButton x:Name="btnEndMapSelect" Click="btnEndMapSelect_Click" Margin="5,0,0,0" IconData="{StaticResource MapSelectIconData}" />
+            </StackPanel>
+        </StackPanel>
+        <Grid Grid.Row="1" Width="200" Margin="0,5,0,5" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+        </Grid>
+    </Grid>
+    
+</mui:ModernDialog>

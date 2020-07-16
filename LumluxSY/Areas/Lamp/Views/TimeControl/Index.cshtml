@@ -1,0 +1,328 @@
+﻿@using LumluxSY.Areas.Lamp.Models
+@using LumluxSSYDB.Model;
+@model LumluxSY.Areas.Lamp.Models.MainViewModel
+@{
+    ViewBag.Title = "时控设置";
+    Layout = "~/Areas/Lamp/Views/Shared/_LayoutPageMain.cshtml";
+}
+
+@{ var hostlists = (List<HostInfoVM>)ViewBag.hostlist;}
+
+@{var tableOT = (List<TimeInterval>)ViewBag.TableOT;}
+@{var tableTT = (List<TimeInterval>)ViewBag.TableTT;}
+@{var LightGroup = (List<tLightGroupInfoes>)ViewBag.LightGroup;}
+@{var LoopInfo = (List<tRelayInfoes>)ViewBag.LoopInfo; }
+
+
+
+
+<input id="EditGUID" hidden="hidden" />
+<input id="isEnable" hidden="hidden" />
+@{
+    if (hostlists.Count > 0)
+    {
+        <input id="sHostGUID" value="@hostlists[0].GUID" hidden="hidden" />
+    }
+}
+
+<!-- BEGIN CONTENT BODY -->
+<div class="page-content-wrapper">
+    <!-- BEGIN PAGE HEADER-->
+    <!-- BEGIN THEME PANEL -->
+    <!-- END THEME PANEL -->
+    <!-- BEGIN PAGE BAR -->
+    <!-- END PAGE BAR -->
+    <!-- BEGIN PAGE TITLE-->
+    <h3 class="page-title">
+        时控设置
+        <small>操作</small>
+    </h3>
+    <!-- END PAGE TITLE-->
+    <!-- END PAGE HEADER-->
+    <div class="inbox">
+        <div class="row">
+            <div class="col-md-2">
+                <div class="inbox-sidebar" style="height: 450px;">
+                    <a href="#" class="btn dark btn-block">
+                        <i class="fa fa-tv"></i> 主机
+                    </a>
+                    <ul class="inbox-nav scroller" id="ulTimeControlMainLeft" style="height: 350px;" data-handle-color="#637283">
+                        @*
+                            <li class="active"><a>gfasgf0</a></li>
+                            <li><a>gfasgf0</a></li>
+                            <li><a>gfasgf0</a></li>*@
+                        @foreach (HostInfoVM hiVM in hostlists)
+                        {
+                            <li class="" id="@hiVM.GUID" title="@hiVM.Name">
+                                <a href="#" style=" color:#0c628d">@hiVM.AsName</a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-10">
+                <div class="inbox-body" style="height: 450px;">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- BEGIN EXAMPLE TABLE PORTLET-->
+
+
+                            <div class="portlet-body" style="height:350px">
+                                <div class="col-md-6" style="height:330px;">
+                                    <!-- BEGIN SAMPLE TABLE PORTLET-->
+                                    <table id="tableOT" class="table table-hover table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    时段
+                                                </th>
+                                                <th>
+                                                    所设时间
+                                                </th>
+                                                <th>
+                                                    执行动作
+                                                </th>
+                                                <th>是否启用 </th>
+                                                <th> 操作 </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="OT">
+                                            @foreach (TimeInterval tivm in tableOT)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        @tivm.tct.iID
+                                                    </td>
+                                                    <td> @tivm.setTime </td>
+                                                    <td title="@tivm.ExecutiveAction">
+                                                        @tivm.ExecutiveAction
+
+                                                    </td>
+                                                    <td>@tivm.IsEnable</td>
+                                                    <td>
+                                                        <a href="#form_modal4" data-toggle="modal" onclick="GoToTimeControl('@tivm.tct.sGUID')">编辑</a>
+                                                        @*<a data-target="#prjinfo" data-toggle="modal" href="@Url.Action("SaveSet", "TimeControl", new { area = "Lamp" })" onclick="test()">
+                                                                编辑
+                                                            </a>*@
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+
+
+
+
+
+
+                                    <div id="form_modal4" class="modal fade" style="z-index: 10051; min-width:450px;" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header" style="background-color:#bfcad1;">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                    <h4 class="modal-title"><i class="icon-pencil"></i> 干将西路(中) - 时段1 - 时控修改</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form action="#" class="form-horizontal">
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-2">所设时间:</label>
+                                                            <div class="col-md-4">
+                                                                <div class="input-group">
+                                                                    <input id="timeset" name="timeset" type="text" class="form-control timepicker timepicker-24">
+                                                                    <span class="input-group-btn">
+                                                                        <button class="btn default" type="button">
+                                                                            <i class="fa fa-clock-o"></i>
+                                                                        </button>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="input-group">
+                                                                    <div class="checkbox-list" style="margin:8px;">
+                                                                        <label for="closeButton">
+                                                                            <input id="IsCheckBox" type="checkbox" class="input-small" />启用
+                                                                        </label>
+
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+
+                                                            <label class="control-label col-md-2">执行类型:</label>
+                                                            <input id="selectedId" hidden="hidden" />
+                                                            <div class="col-md-6">
+                                                                <div class="input-group">
+                                                                    <select id="selecttype_time" class="form-control input-sm select2-multiple">
+                                                                        <option value="mr">无执行类型</option>
+                                                                        <option value="0">回路</option>
+                                                                        <option value="1">群组</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <div class="input-group">
+                                                                    <label id="EType" style="color:red;" class="control-label "></label>
+                                                                </div>
+                                                            </div>
+
+
+                                                        </div>
+                                                        <div class="form-group" id="hl_Temp">
+                                                            <label class="control-label col-md-2"> 回路/状态:</label>
+                                                            <div class="col-md-4">
+                                                                <div class="input-group">
+                                                                    <select id="selectcircuitinfo_time" class="form-control input-sm select2-multiple">
+
+                                                                        @foreach (tRelayInfoes trvm in LoopInfo)
+                                                                        {
+                                                                            <option value='@trvm.sGUID'>@trvm.sName</option>
+                                                                        }
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="input-group">
+                                                                    <!--modeswitchhl_time-->
+
+                                                                    <input id="modeswitchhl_time" type="checkbox" data-on-text="开" data-off-text="关" data-on-color="info" data-off-color="success" class="make-switch" data-size="small">
+
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group" id="qz_Temp">
+                                                            <label class="control-label col-md-2"> 群组选择:</label>
+                                                            <div class="col-md-6">
+                                                                <div class="input-group">
+                                                                    <select id="selectlightgroupinfo_time" class="form-control input-sm select2-multiple">
+
+                                                                        @foreach (tLightGroupInfoes tgvm in LightGroup)
+                                                                        {
+                                                                            <option value='@tgvm.sGUID'>@tgvm.sName</option>
+                                                                        }
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <div class="input-group">
+                                                                    <label id="lLightGroup" style="color:red;" class="control-label "></label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
+
+                                                        <div class="form-group" id="qz_Temp_State">
+                                                            <label class="control-label col-md-2">目标状态:</label>
+                                                            <div class="col-md-6">
+                                                                <div class="input-group">
+                                                                    <input id="modeswitch_time" type="checkbox" data-on-text="调光" data-off-text="开关" checked data-on-color="info" data-off-color="success" class="make-switch" data-size="small">&nbsp;&nbsp;&nbsp;
+                                                                    <input id="lightswitch_time" type="checkbox" data-on-text="打开" data-off-text="关闭" checked data-on-color="info" data-off-color="success" class="make-switch" data-size="small">
+                                                                </div>
+                                                            </div>
+                                                            <div id="slider1_time" class="row margin-top-10">
+                                                                <div id="drange" class="col-xs-7 col-xs-offset-1 col-sm-7 col-sm-offset-1 col-md-7 col-md-offset-1">
+
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </form>
+                                                </div>
+                                                <div class="modal-footer" style="border-top:0px;">
+                                                    <button class="btn dark btn-outline" data-dismiss="modal" aria-hidden="true">取消</button>
+                                                    <button id="btnsave" class="btn green btn-primary" data-dismiss="modal" onclick="saveSet()">保存</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- END SAMPLE TABLE PORTLET-->
+                                </div>
+                                <div class="col-md-6" style="height:330px;">
+                                    <!-- BEGIN SAMPLE TABLE PORTLET-->
+                                    <table id="tableTT" class="table table-hover table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    时段
+                                                </th>
+                                                <th>
+                                                    所设时间
+                                                </th>
+                                                <th>
+                                                    执行动作
+                                                </th>
+                                                <th>是否启用 </th>
+                                                <th> 操作 </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="TT">
+                                            @foreach (TimeInterval ttvm in tableTT)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        @ttvm.tct.iID
+                                                    </td>
+                                                    <td> @ttvm.setTime </td>
+                                                    <td title="@ttvm.ExecutiveAction">
+                                                        @ttvm.ExecutiveAction
+
+                                                    </td>
+                                                    <td>@ttvm.IsEnable</td>
+                                                    <td>
+                                                        <a href="#form_modal4" data-toggle="modal" onclick="GoToTimeControl('@ttvm.tct.sGUID')">编辑</a>
+                                                        @*<a data-target="#prjinfo" data-toggle="modal" href="@Url.Action("SaveSet", "TimeControl", new { area = "Lamp" })" onclick="test()">
+                                                                编辑
+                                                            </a>*@
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                    <!-- END SAMPLE TABLE PORTLET-->
+                                </div>
+                            </div>
+
+                            <!-- END EXAMPLE TABLE PORTLET-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END CONTENT BODY -->
+@section MainCSS{
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+    <!-- 时分秒样式 -->
+    <link href="/UILib/Metronic/assets/global/plugins/clockface/css/clockface.css" rel="stylesheet" type="text/css" />
+    <link href="/UILib/Metronic/assets/global/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css" rel="stylesheet" type="text/css" />
+
+    <link href="/UILib/Metronic/assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
+    <link href="/UILib/Metronic/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css" />
+
+    <style type="text/css">
+        #tableTT tbody tr td {
+            padding: 5px;
+        }
+
+        #tableOT tbody tr td {
+            padding: 5px;
+        }
+    </style>
+
+}
+
+@section MainJS{
+    <!--时分秒的js--->
+    <script src="/UILib/Metronic/assets/global/plugins/clockface/js/clockface.js" type="text/javascript"></script>
+    <script src="/UILib/Metronic/assets/global/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js" type="text/javascript"></script>
+    <script src="/Scripts/Lamp/components-time-pickers.js" type="text/javascript"></script>
+    <script src="/Scripts/Lamp/TimeControl.js" type="text/javascript"></script>
+    <script src="/UILib/Metronic/assets/global/scripts/datatable.js" type="text/javascript"></script>
+
+}

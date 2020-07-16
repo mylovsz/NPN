@@ -1,0 +1,213 @@
+﻿<Window x:Class="LampService.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Width="900" Height="600"
+        Title="服务器程序 v1.6-beta" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded" Closing="Window_Closing" Closed="Window_Closed" Icon="LightServer.ico">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+    
+        <TabControl Margin="5,5,5,1">
+            <TabItem Header="GRPS相关">
+                <TabItem.Content>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="0" />
+                        </Grid.RowDefinitions>
+                        <StackPanel Margin="10,5,10,5" Grid.Row="0">
+                            <GroupBox Header="GPRS端口设置">
+                                <StackPanel Orientation="Horizontal">
+                                    <StackPanel Name="spGPRSConfig" Height="21"  Orientation="Horizontal">
+                                        <TextBlock Text="服务IP地址：" Margin="20,0,0,0" VerticalAlignment="Center"/>
+                                        <ComboBox Name="combGPRSIP" DropDownOpened="combGPRSIP_DropDownOpened" Margin="10,0,10,0" Width="110" IsEditable="True" IsReadOnly="True" />
+                                        <TextBlock Text="服务端口：" Margin="20,0,0,0" VerticalAlignment="Center"/>
+                                        <TextBox Name="txtGPRSPort" Text="30012" Width="45" MaxLength="5" />
+                                        <TextBlock Text="超时时间（单位秒）：" ToolTip="一般为心跳包两倍" VerticalAlignment="Center" Margin="20,0,0,0" />
+                                        <TextBox Text="100" Name="txtGPRSHeadTimeout" ToolTip="一般为心跳包两倍" Width="45" />
+                                    </StackPanel>
+                                    <StackPanel Margin="10,0,0,0" Orientation="Horizontal">
+                                        <Button Name="btnGPRSStart" Click="btnGPRSStart_Click" Content="启动"/>
+                                        <Button Name="btnGPRSStop" Click="btnGPRSStop_Click" Margin="5,0,0,0" Content="停止"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </GroupBox>
+                        </StackPanel>
+                        <Grid Margin="10,5,10,5" Grid.Row="1">
+                            <GroupBox Header="GPRS信息" Grid.Column="0">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="110" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid >
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="30" />
+                                            <RowDefinition Height="*" />
+                                        </Grid.RowDefinitions>
+                                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                                            <Button Name="btnReGPRSOnline" Content="刷新在线列表" Click="btnReGPRSOnline_Click" />
+                                        </StackPanel>
+                                        <ListBox Name="lbGPRSOnline" Grid.Row="1">
+                                        </ListBox>
+                                    </Grid>
+                                    <TextBox IsUndoEnabled="False" Name="txtGPRSRealInfo" IsReadOnly="True" Margin="5,5,5,0" Grid.Column="1" TextWrapping="Wrap" />
+                                </Grid>
+                            </GroupBox>
+                        </Grid>
+                    </Grid>
+                </TabItem.Content>
+            </TabItem>
+            <TabItem Header="项目相关">
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions> 
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel.Resources>
+                            <Style TargetType="StackPanel">
+                                <Setter Property="Orientation" Value="Horizontal" />
+                            </Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="VerticalAlignment" Value="Center" />
+                                <Setter Property="Margin" Value="5,0" />
+                            </Style>
+                            <Style TargetType="TextBox">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                                <Setter Property="Width" Value="80" />
+                            </Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Margin" Value="4,0" />
+                            </Style>
+                        </StackPanel.Resources>
+                        <StackPanel>
+                            <TextBlock Text="项目名称：" />
+                            <TextBox Name="txtPrjName" Text=""/>
+                        </StackPanel>
+                        <StackPanel>
+                            <TextBlock Text="责任人：" />
+                            <TextBox Name="txtPrjAdmin" Text=""/>
+                        </StackPanel>
+                        <StackPanel>
+                            <TextBlock Text="备注：" />
+                            <TextBox Name="txtPrjRemark" Text=""/>
+                        </StackPanel>
+                        <StackPanel>
+                            <TextBlock Text="经度 ：" />
+                            <TextBox Name="txtPrjLng" Text=""/>
+                        </StackPanel>
+                        <StackPanel>
+                            <TextBlock Text="纬度 ：" />
+                            <TextBox Name="txtPrjLat" Text=""/>
+                        </StackPanel>
+                        <StackPanel>
+                            <Button Name="btnPrjAdd" Click="btnPrjAdd_Click" Content="增加" />
+                            <Button Name="btnPrjSave" Visibility="Collapsed" Click="btnPrjSave_Click" Content="保存" />
+                            <Button Name="btnPrjCancel" Visibility="Collapsed" Click="btnPrjCancel_Click" Content="取消" />
+                            <Button Name="btnPrjRefresh" Click="btnPrjRefresh_Click" Content="刷新" />
+                        </StackPanel>
+                    </StackPanel>
+                    <Grid Margin="10" Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <ListBox Name="lbPrjShow" Width="120" MouseDoubleClick="lbPrjShow_MouseDoubleClick">
+                            
+                        </ListBox>
+                        <Grid Margin="10" Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <StackPanel Margin="10" Orientation="Horizontal">
+                                <TextBlock VerticalAlignment="Center" Text="键 : " />
+                                <TextBox Name="txtPrjSetKey" Text="" Width="120" />
+                                <TextBlock Margin="15,0,0,0" VerticalAlignment="Center" Text="值 : " />
+                                <TextBox Name="txtPrjSetValue" Text="" Width="120" />
+                                <TextBlock Margin="15,0,0,0" VerticalAlignment="Center" Text="备注 : " />
+                                <TextBox Name="txtPrjSetDesc" Text="" Width="120" />
+                                <Button Margin="15,0,0,0" Name="btnPrjSetRefresh" Click="btnPrjSetRefresh_Click" Content="刷新" />
+                                <Button Margin="15,0,0,0" Name="btnPrjSetAdd" Click="btnPrjSetAdd_Click" Content="增加" />
+                                <Button Margin="15,0,0,0" IsEnabled="False" Name="btnPrjSetSave" Click="btnPrjSetSave_Click" Content="保存" />
+                                <Button Margin="15,0,0,0" IsEnabled="False" Name="btnPrjSetCancel" Click="btnPrjSetCancel_Click" Content="取消" />
+                            </StackPanel>
+                            <ListBox Grid.Row="1" Name="lbPrjSetShow">
+                                <ListBox.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Header="编辑" Name="btnPrjSetEdit" Click="btnPrjSetEdit_Click"/>
+                                    </ContextMenu>
+                                </ListBox.ContextMenu>
+
+                            </ListBox>
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="用户相关">
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel.Resources>
+                            <Style TargetType="StackPanel">
+                                <Setter Property="Orientation" Value="Horizontal" />
+                            </Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="VerticalAlignment" Value="Center" />
+                                <Setter Property="Margin" Value="5,0" />
+                            </Style>
+                            <Style TargetType="TextBox">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                                <Setter Property="Width" Value="80" />
+                            </Style>
+                            <Style TargetType="ComboBox">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                                <Setter Property="Width" Value="80" />
+                            </Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Margin" Value="4,0" />
+                            </Style>
+                        </StackPanel.Resources>
+                        <StackPanel>
+                            <TextBlock Text="关联项目：" />
+                            <ComboBox Name="combUserPrj" DropDownOpened="combUserPrj_DropDownOpened" SelectionChanged="combUserPrj_SelectionChanged"/>
+                        </StackPanel>
+                        <StackPanel>
+                            <TextBlock Text="用户名称：" />
+                            <TextBox Name="txtUserName" Text=""/>
+                        </StackPanel>
+                        <StackPanel>
+                            <TextBlock Text="用户权限：" />
+                            <ComboBox Name="combUserAuthority" Text="" SelectedIndex="0">
+                                <ComboBoxItem Content="管理员"/>
+                                <ComboBoxItem Content="访客"/>
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel>
+                            <Button Name="btnUserAdd" Click="btnUserAdd_Click" Content="增加" />
+                            <Button Name="btnUserSave" IsEnabled="False" Click="btnUserSave_Click" Content="保存" />
+                            <Button Name="btnUserCancel" IsEnabled="False" Click="btnUserCancel_Click" Content="取消" />
+                            <Button Name="btnUserRefresh" Click="btnUserRefresh_Click" Content="刷新" />
+                            <Button Visibility="Hidden" Name="btnTestAdd" Click="btnTestAdd_Click" Content="增加测试分组主机单灯分组单灯"/>
+                        </StackPanel>
+                    </StackPanel>
+                    <Grid Margin="10" Grid.Row="1">
+                        <ListBox Name="lbUserShow" MouseDoubleClick="LbUserShow_MouseDoubleClick">
+
+                        </ListBox>
+                    </Grid>
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <StackPanel Grid.Row="1">
+            <TextBlock Margin="5,0,0,0" Name="lbSrvTime" ToolTip="增加软件启动自动运行"/>
+        </StackPanel>
+    </Grid>
+</Window>
